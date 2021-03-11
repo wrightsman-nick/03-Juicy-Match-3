@@ -1,0 +1,107 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://UI/Menu.gd" type="Script" id=1]
+[ext_resource path="res://Assets/splatter.png" type="Texture" id=2]
+[ext_resource path="res://Assets/edge-of-the-galaxy-font/EdgeOfTheGalaxyPoster-3zRAp.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/edge-of-the-galaxy-font/EdgeOfTheGalaxyItalic-ZVJB3.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/galaxy.png" type="Texture" id=5]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.985185 )
+colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+min_value = -1.0
+_data = [ Vector2( 0, -1 ), 0.0, 0.0, 0, 0, Vector2( 0.958763, -1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.636364 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.1
+orbit_velocity_random = 0.5
+linear_accel = 0.2
+damping = 0.2
+scale = 0.5
+color_ramp = SubResource( 2 )
+hue_variation = 1.0
+hue_variation_random = 0.1
+hue_variation_curve = SubResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 72
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=8]
+font_data = ExtResource( 3 )
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 566.0
+margin_bottom = 482.0
+color = Color( 0, 0.227451, 1, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles2D" type="Particles2D" parent="Background"]
+position = Vector2( 250, 250 )
+process_material = SubResource( 5 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = -0.222717
+margin_right = 576.0
+margin_bottom = 511.777
+custom_fonts/font = SubResource( 6 )
+text = "Diamond Crusher"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" type="Button" parent="."]
+margin_left = 238.0
+margin_top = 512.0
+margin_right = 338.0
+margin_bottom = 552.0
+custom_fonts/font = SubResource( 7 )
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 238.0
+margin_top = 562.0
+margin_right = 338.0
+margin_bottom = 602.0
+custom_fonts/font = SubResource( 8 )
+text = "Quit"
+
+[node name="Sprite" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 851.357, 741.048 )
+texture = ExtResource( 5 )
+[connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
